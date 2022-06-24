@@ -10,6 +10,8 @@
 char Licence[50] = "";
 using namespace KeyAuth;
 IDirect3DTexture9* Key;
+IDirect3DTexture9* Logoo;
+
 int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
     std::string name = ("");
@@ -29,6 +31,7 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     ShowWindow(main_hwnd, SW_HIDE);
     UpdateWindow(main_hwnd);
     D3DXCreateTextureFromFileInMemoryEx(g_pd3dDevice, KEYY, sizeof(KEYY), 100, 100, D3DX_DEFAULT, D3DUSAGE_DYNAMIC, D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &Key);
+    D3DXCreateTextureFromFileInMemoryEx(g_pd3dDevice, logo, sizeof(logo), 100, 100, D3DX_DEFAULT, D3DUSAGE_DYNAMIC, D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, NULL, NULL, &Logoo);
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.Fonts->AddFontDefault();
@@ -134,8 +137,11 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     {
                         width = 394;height = 200;
                         ImGui::Separator();
-                        ImGui::Text(" ");ImGui::Text(" ");ImGui::Text(" ");
-                        ImGui::SameLine(261);
+                        ImGui::Text(" ");
+                        ImGui::SameLine(165);
+                        ImGui::Image(Logoo, ImVec2(50, 50));
+                        ImGui::Text(" ");
+                        ImGui::SameLine(262);
                         ImGui::Image(Key, ImVec2(15, 15));
                         if (ImGui::IsItemHovered())
                         {
@@ -161,7 +167,7 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                                 currentColumn = 2; }
                             ImGui::OpenPopup("##expiry");
                         }
-                        ImGui::Text(" ");ImGui::Text(" ");
+                        ImGui::Text(" ");
                         ImGui::Separator();
                         ImGui::Text(" ");
                         ImGui::PushFont(font);
